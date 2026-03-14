@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import NeuralBackground from './backgrounds/NeuralBackground';
+import TiltCard from './TiltCard';
 import styles from './Services.module.css';
 
 const services = [
@@ -72,29 +73,28 @@ export default function Services() {
 
         <div className={styles.grid}>
           {services.map((s, i) => (
-            <motion.div
-              key={s.num}
-              className={styles.card}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 * i }}
-              whileHover={{ y: -8, transition: { duration: 0.3 } }}
-            >
-              <div className={styles.cardTop}>
-                <span className={styles.num} style={{ background: s.gradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                  {s.num}
-                </span>
-                <div className={styles.cardLine} style={{ background: s.gradient }} />
-              </div>
-              <h3 className={styles.cardTitle}>{s.title}</h3>
-              <p className={styles.cardDesc}>{s.desc}</p>
-              <div className={styles.tags}>
-                {s.tags.map((tag) => (
-                  <span key={tag} className={styles.tag}>{tag}</span>
-                ))}
-              </div>
-              <div className={styles.cardGlow} style={{ background: s.gradient }} />
-            </motion.div>
+            <TiltCard key={s.num} className={styles.card}>
+              <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: 0.1 * i }}
+              >
+                <div className={styles.cardTop}>
+                  <span className={styles.num} style={{ background: s.gradient, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+                    {s.num}
+                  </span>
+                  <div className={styles.cardLine} style={{ background: s.gradient }} />
+                </div>
+                <h3 className={styles.cardTitle}>{s.title}</h3>
+                <p className={styles.cardDesc}>{s.desc}</p>
+                <div className={styles.tags}>
+                  {s.tags.map((tag) => (
+                    <span key={tag} className={styles.tag}>{tag}</span>
+                  ))}
+                </div>
+                <div className={styles.cardGlow} style={{ background: s.gradient }} />
+              </motion.div>
+            </TiltCard>
           ))}
         </div>
       </div>
