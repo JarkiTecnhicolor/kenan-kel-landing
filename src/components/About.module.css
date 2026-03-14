@@ -1,119 +1,16 @@
-.about {
-  position: relative;
-  padding: 8rem 0;
-  overflow: hidden;
-}
-
-.bgLine {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 1px;
-  height: 100%;
-  background: linear-gradient(to bottom, transparent, rgba(0, 240, 255, 0.1), transparent);
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
-}
-
-.label {
-  display: inline-block;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.15em;
-  color: var(--accent-cyan);
-  margin-bottom: 1rem;
-}
-
-.separator {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 2rem 0;
-}
-
-.separatorLine {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(to right, var(--accent-cyan), transparent);
-}
-
-.separatorLine:last-child {
-  background: linear-gradient(to left, var(--accent-cyan), transparent);
-}
-
-.separatorDot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent-cyan);
-}
-
-.quote {
-  font-style: italic;
-  color: var(--text-secondary);
-  font-size: 1rem;
-  line-height: 1.7;
-  border-left: 2px solid var(--accent-purple);
-  padding-left: 1.5rem;
-}
-
-.right {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.2rem;
-}
-
-.card {
-  padding: 1.5rem;
-  background: var(--bg-card);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 16px;
-  transition: all 0.3s;
-  cursor: default;
-}
-
-.card:hover {
-  border-color: rgba(0, 240, 255, 0.2);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-}
-
-.cardIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 52px;
-  height: 52px;
-  border-radius: 12px;
-  background: rgba(0, 240, 255, 0.05);
-  border: 1px solid rgba(0, 240, 255, 0.1);
-  margin-bottom: 1rem;
-}
-
-.cardTitle {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.cardDesc {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
-
-@media (max-width: 768px) {
-  .grid {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-  .right {
-    grid-template-columns: 1fr;
-  }
-}
+.about { position: relative; padding: 8rem 0; overflow: hidden; background: var(--bg-secondary); }
+.bgLine { position: absolute; top: 0; left: 50%; width: 1px; height: 100%; background: linear-gradient(to bottom, transparent, rgba(255, 45, 123, 0.15), transparent); }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+.label { display: inline-block; font-family: 'Share Tech Mono', monospace; font-size: 0.8rem; font-weight: 400; text-transform: uppercase; letter-spacing: 0.2em; color: var(--neon-pink); margin-bottom: 1rem; text-shadow: var(--glow-pink); }
+.separator { display: flex; align-items: center; gap: 0.5rem; margin: 2rem 0; }
+.separatorLine { flex: 1; height: 1px; background: linear-gradient(to right, var(--neon-pink), transparent); }
+.separatorLine:last-child { background: linear-gradient(to left, var(--neon-cyan), transparent); }
+.separatorDot { width: 6px; height: 6px; background: var(--neon-pink); box-shadow: var(--glow-pink); clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%); }
+.quote { font-style: italic; color: var(--text-secondary); font-size: 1rem; line-height: 1.7; border-left: 2px solid var(--neon-purple); padding-left: 1.5rem; }
+.right { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+.card { padding: 1.5rem; background: var(--bg-card); border: 1px solid rgba(255, 45, 123, 0.1); transition: all 0.3s; clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px)); }
+.card:hover { border-color: rgba(255, 45, 123, 0.4); box-shadow: 0 0 20px rgba(255, 45, 123, 0.1); }
+.cardIcon { display: flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: rgba(255, 45, 123, 0.08); border: 1px solid rgba(255, 45, 123, 0.2); margin-bottom: 1rem; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); }
+.cardTitle { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--neon-cyan); text-transform: uppercase; }
+.cardDesc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; }
+@media (max-width: 768px) { .grid { grid-template-columns: 1fr; gap: 3rem; } .right { grid-template-columns: 1fr; } }

@@ -1,98 +1,14 @@
-.footer {
-  padding: 4rem 0 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  background: var(--bg-secondary);
-}
-
-.top {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 3rem;
-  margin-bottom: 3rem;
-}
-
-.brand {
-  max-width: 300px;
-}
-
-.logo {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  margin-bottom: 1rem;
-}
-
-.logoK {
-  background: linear-gradient(135deg, #00f0ff, #8b5cf6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.logoAmp {
-  color: #f472b6;
-  font-size: 1rem;
-  margin: 0 0.2rem;
-}
-
-.brandDesc {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  line-height: 1.6;
-}
-
-.linksGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.linksTitle {
-  font-family: 'Space Grotesk', sans-serif;
-  font-size: 0.9rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--text-primary);
-}
-
-.linksGroup a {
-  font-size: 0.85rem;
-  color: var(--text-muted);
-  transition: color 0.3s;
-}
-
-.linksGroup a:hover {
-  color: var(--accent-cyan);
-}
-
-.bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-
-.madeWith {
-  color: var(--text-muted);
-}
-
-@media (max-width: 768px) {
-  .top {
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-  }
-  .brand {
-    grid-column: 1 / -1;
-  }
-  .bottom {
-    flex-direction: column;
-    gap: 0.5rem;
-    text-align: center;
-  }
-}
+.footer { padding: 4rem 0 2rem; border-top: 1px solid rgba(255, 45, 123, 0.15); background: var(--bg-secondary); }
+.top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+.brand { max-width: 300px; }
+.logo { font-family: 'Orbitron', sans-serif; font-size: 1.3rem; font-weight: 700; display: inline-flex; align-items: center; gap: 0.3rem; margin-bottom: 1rem; }
+.logoK { color: var(--neon-pink); text-shadow: var(--glow-pink); }
+.logoAmp { color: var(--neon-cyan); font-size: 0.9rem; margin: 0 0.2rem; }
+.brandDesc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+.linksGroup { display: flex; flex-direction: column; gap: 0.6rem; }
+.linksTitle { font-family: 'Orbitron', sans-serif; font-size: 0.75rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--neon-cyan); text-transform: uppercase; letter-spacing: 0.1em; }
+.linksGroup a { font-size: 0.85rem; color: var(--text-muted); transition: color 0.3s; }
+.linksGroup a:hover { color: var(--neon-pink); text-shadow: var(--glow-pink); }
+.bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 2rem; border-top: 1px solid rgba(255, 45, 123, 0.08); font-family: 'Share Tech Mono', monospace; font-size: 0.75rem; color: var(--text-muted); }
+.madeWith { color: var(--text-muted); }
+@media (max-width: 768px) { .top { grid-template-columns: 1fr 1fr; gap: 2rem; } .brand { grid-column: 1 / -1; } .bottom { flex-direction: column; gap: 0.5rem; text-align: center; } }

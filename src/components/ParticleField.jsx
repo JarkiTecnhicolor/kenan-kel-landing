@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import styles from './ParticleField.module.css';
 
+const COLORS = ['#ff2d7b', '#00f0ff', '#39ff14', '#bf00ff'];
+
 export default function ParticleField() {
   const canvasRef = useRef(null);
 
@@ -18,16 +20,18 @@ export default function ParticleField() {
 
     const createParticles = () => {
       particles = [];
-      const count = Math.min(120, Math.floor((canvas.width * canvas.height) / 12000));
+      const count = Math.min(80, Math.floor((canvas.width * canvas.height) / 20000));
       for (let i = 0; i < count; i++) {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.5,
-          vy: (Math.random() - 0.5) * 0.5,
+          vx: (Math.random() - 0.5) * 0.4,
+          vy: (Math.random() - 0.5) * 0.4,
           size: Math.random() * 2 + 0.5,
-          color: ['#00f0ff', '#8b5cf6', '#f472b6', '#3b82f6'][Math.floor(Math.random() * 4)],
-          alpha: Math.random() * 0.5 + 0.2,
+          color: COLORS[Math.floor(Math.random() * COLORS.length)],
+          alpha: Math.random() * 0.5 + 0.1,
+          pulse: Math.random() * Math.PI * 2,
+          pulseSpeed: Math.random() * 0.02 + 0.01,
         });
       }
     };
@@ -35,50 +39,65 @@ export default function ParticleField() {
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      particles.forEach((p, i) => {
-        // Mouse repulsion
+      // Draw connection lines between nearby particles
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 150) {
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(0, 240, 255, ${0.06 * (1 - dist / 150)})`;
+            ctx.lineWidth = 0.5;
+            ctx.stroke();
+          }
+        }
+      }
+
+      particles.forEach((p) => {
+        // Mouse interaction
         const dx = p.x - mouse.x;
         const dy = p.y - mouse.y;
         const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 150) {
-          const force = (150 - dist) / 150;
-          p.vx += (dx / dist) * force * 0.5;
-          p.vy += (dy / dist) * force * 0.5;
+        if (dist < 120) {
+          const force = (120 - dist) / 120;
+          p.vx += (dx / dist) * force * 0.3;
+          p.vy += (dy / dist) * force * 0.3;
         }
 
         p.x += p.vx;
         p.y += p.vy;
         p.vx *= 0.99;
         p.vy *= 0.99;
+        p.pulse += p.pulseSpeed;
 
-        if (p.x < 0) p.x = canvas.width;
-        if (p.x > canvas.width) p.x = 0;
-        if (p.y < 0) p.y = canvas.height;
-        if (p.y > canvas.height) p.y = 0;
+        if (p.x < -20) p.x = canvas.width + 20;
+        if (p.x > canvas.width + 20) p.x = -20;
+        if (p.y < -20) p.y = canvas.height + 20;
+        if (p.y > canvas.height + 20) p.y = -20;
 
+        const pulseAlpha = p.alpha + Math.sin(p.pulse) * 0.15;
+
+        // Draw glow
         ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.globalAlpha = p.alpha;
+        ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
+        ctx.fillStyle = p.color.replace(')', `, ${pulseAlpha * 0.2})`).replace('rgb', 'rgba').replace('#', '');
+        // Use hex to rgba
+        const r = parseInt(p.color.slice(1, 3), 16);
+        const g = parseInt(p.color.slice(3, 5), 16);
+        const b = parseInt(p.color.slice(5, 7), 16);
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${pulseAlpha * 0.15})`;
         ctx.fill();
 
-        // Connect nearby particles
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const d = Math.hypot(p.x - p2.x, p.y - p2.y);
-          if (d < 120) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = p.color;
-            ctx.globalAlpha = (1 - d / 120) * 0.15;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
+        // Draw particle
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${pulseAlpha})`;
+        ctx.fill();
       });
 
-      ctx.globalAlpha = 1;
       animationId = requestAnimationFrame(animate);
     };
 
