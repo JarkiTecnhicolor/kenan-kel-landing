@@ -9,6 +9,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import CursorFollower from './components/CursorFollower';
 import ScrollProgress from './components/ScrollProgress';
+import SilhouetteReveal from './components/SilhouetteReveal';
 import './styles/global.css';
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
     <>
       <CursorFollower />
       <ScrollProgress />
+      <SilhouetteReveal />
       <Navbar />
       <Hero />
       <About />
